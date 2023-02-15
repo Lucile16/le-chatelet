@@ -82,8 +82,6 @@
             case 7 : include 'Pages/submit_contact.php';
                 break;
 
-            /*page de connexion utilisateur à ajouter*/
-
         }
         include 'Pages/footer.php';
 
