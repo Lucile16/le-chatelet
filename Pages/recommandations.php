@@ -25,6 +25,7 @@
     agissant sous l'autorité du responsable du traitement ou sous celle du sous-traitant, qui a accès à des données 
     à caractère personnel, ne les traite pas, excepté sur instruction du responsable du traitement, à moins d'y être obligée
      par le droit de l'Union ou le droit d'un État membre.</p>
+    <p>Source : <a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre4#Article32">https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre4#Article32</a></p>
 </div>
 
 <!-- A mettre dans un tooltip à côté de l'input mdp -->

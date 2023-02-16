@@ -46,13 +46,16 @@
 </html>
 <?php
     if(isset($_POST['mail'])) {
-        echo('ok');
+        echo('ok' . "\n");
         $email = $_POST['mail'];
-        $pwd = $_POST['actualpassword'];
+        echo("email : " . $email . "\n");
+        $mdp = $_POST['actualpassword'];
+        echo("mdp : " . $mdp . "\n");
 
         //var_dump($email);
-        $user[] = getOneUser($email);
-        $hash = $user[0]['password'];
+        $user = getOneUser($email);
+        echo("user : " . $user . "\n");
+        $hash = $user['password'];
         var_dump($hash, $pwd);
         //var_dump("*****" . $user[0]['password'], $pwd);
         var_dump(password_verify('a', '$2y$10$AQm6EoexBqSIzSK7FYgavO7J89XDzKOsiTL47e5Q0IvlCJdHJ3ePO'));
