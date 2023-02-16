@@ -7,50 +7,114 @@
     <div>
         <h1 class="mt-5 text-center">Bienvenue !</h1>
         
-        <!--<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <div class="card d-flex mx-auto text-center w-25 h-25 mt-5">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Connexion</button>
+                </li>
+            </ul>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-            <img src="..." class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-            </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-            <img src="..." class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-            </div>
-            </div>
-            <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
-            </div>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="mail" placeholder="name@example.com" required>
+                            <label for="floatingInput">Adresse mail*</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" name="actualpassword" placeholder="P@ssw0rd" required>
+                            <label for="floatingPassword">Mot de passe*</label>
+                        </div>
+                        <!-- <div class="form-floating">
+                            <input type="password" class="form-control" id="newpassword" placeholder="P@ssw0rd2" required>
+                            <label for="floatingPassword">Nouveau mot de passe*</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="confirmedpassword" placeholder="P@ssw0rd3" required>
+                            <label for="floatingPassword">Confirmation du mot de passe*</label>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Se connecter</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        </div>-->
-        <!--<form action="contact.php" method="GET">
-        <label for="nom" class="form-label">Nom</label>
-        <input name="nom"></br></br>
-        <label for="prenom" class="form-label">Prénom</label>
-        <input name="prenom">
-        </form> -->
     </div>
 
 </html>
+<?php
+    if(isset($_POST['mail'])) {
+        echo('ok');
+        $email = $_POST['mail'];
+        $pwd = $_POST['actualpassword'];
+
+        //var_dump($email);
+        $user[] = getOneUser($email);
+        $hash = $user[0]['password'];
+        var_dump($hash, $pwd);
+        //var_dump("*****" . $user[0]['password'], $pwd);
+        var_dump(password_verify('a', '$2y$10$AQm6EoexBqSIzSK7FYgavO7J89XDzKOsiTL47e5Q0IvlCJdHJ3ePO'));
+        //var_dump($user);
+    }
+    
+
+    
+    //var_dump($users);
+?>
+
+
+<!-- <div id="CO">
+        <div class="cpt"><h2>Connectez-vous à votre compte</h2>
+    </div>
+<center>
+    <div class="compte">
+        <form  method="GET" style="border-radius: 20px;width:50%;display:flex;">
+        <input type="hidden" name="pages" value=2 />
+        <input type="hidden" name="connexion">
+        <h2>CONNEXION</h2>
+            <div>
+                <label for="email">Email :</label>
+                <input type="text" name="email" id="nom/email" required />
+            </div>
+            <div>
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" name="mdp" id="mdp" required />
+            </div>
+            <div>
+                <input type="submit" value="Connexion" name="connexion">
+            </div>
+        </form>
+    </div>
+</center> -->
+        <?php
+// include 'connexion-base.php';
+if (isset($_GET['email']) && isset($_GET['mdp'])) {
+
+    $email = $_GET['email'];
+    $mdp = $_GET['mdp'];
+
+    $requete = $pdo->prepare ("SELECT utilnom, utilprenom, utiladresse, utilcp, utilville, utiltel, utilmail from utilisateur where utilmail='$email' and utilmdp='$mdp'");
+
+    if($requete->execute()){
+
+        if (($requete->rowcount())==1) {
+            $_SESSION['personne'] = $requete->fetch(PDO::FETCH_ASSOC);
+            header("Status: 301 Moved Permanently", false, 301);
+            header("Location: http://localhost/mangaland/Index.php?pages=4");
+            exit();
+        }else {
+            echo "<script>alert('Compte inexistant | Veuiller vous inscrire!');</script>";
+        }
+    
+
+    
+
+    }else {
+        echo "<script>alert('Erreur Vous n'avez pas peu vous connecté');</script>";
+
+    }
+}
+
+?>
