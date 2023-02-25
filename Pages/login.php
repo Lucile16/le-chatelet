@@ -1,3 +1,28 @@
+<?php
+    session_start();
+    if (isset($_POST['mail']) && isset($_POST['actualpassword'])) {
+        $mail = $_POST['mail'];
+        $actualpassword = $_POST['actualpassword'];
+        $user = getOneUser($mail, $actualpassword);
+        // A HASHER : $hash = $user['password'];
+        echo(json_encode($user));
+
+        if (isset($user['password']) && $user['password'] === $actualpassword && isset($user['mail']) && $user['mail'] === $mail) {
+            // Stockage des informations de l'utilisateur dans la variable session
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['mail'] = $mail;
+            $_SESSION['actualpassword'] = $actualpassword;
+            $_SESSION['is_logged_in'] = true;
+
+            // Connecté, redirection vers la page d'accueil
+            header('Location: http://localhost/le-chatelet/index.php?page=0');
+            exit();
+        } else {
+            // Affichage du message d'erreur
+            echo("<script>alert('Identifiant ou mot de passe incorrect')</script>");
+        }
+    }
+?>
 <div class="card d-flex mx-auto text-center w-25 h-25 mt-5">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
@@ -33,32 +58,3 @@
         </div>
     </div>
 </div>
-
-<?php
-    session_start(); // Démarrage de la session
-    if (isset($_POST['mail']) && isset($_POST['actualpassword'])) {
-        var_dump("post");
-        $mail = $_POST['mail'];
-        $actualpassword = $_POST['actualpassword'];
-        // Vérification des informations de connexion ici
-        $user = getOneUser($mail);
-        var_dump("user : " . json_encode($user) . "\n");
-        // A HASHER : $hash = $user['password'];
-
-        if (isset($user['password']) && $user['password'] === $actualpassword && isset($user['mail']) && 
-            $user['mail'] === $mail) {
-            var_dump("checked !");
-            // Création de la session et stockage des informations de l'utilisateur
-            $_SESSION['mail'] = $mail;
-            $_SESSION['actualpassword'] = $actualpassword;
-            $_SESSION['is_logged_in'] = true;
-            var_dump($_SESSION);
-            // Redirection vers la page d'accueil
-            header('Location: http://localhost/le-chatelet/index.php?page=0');
-            exit();
-        } else {
-            // Affichage du message d'erreur
-            echo("<script>alert('Identifiant ou mot de passe incorrect'</script>");
-        }
-    }
-?>

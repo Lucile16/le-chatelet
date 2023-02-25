@@ -4,7 +4,6 @@
     <?php
         include_once('connexion_db.php');
         include_once('requests.php');
-
         include 'Pages/header.php';
 
         if (!isset($_GET['page'])){ $_GET['page']=0; }
