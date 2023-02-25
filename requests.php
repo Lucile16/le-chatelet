@@ -18,14 +18,17 @@
     //On récupère un utilisateur
     function getOneUser($mail, $password) {
         try {
+            $result = null;
             $conn = connexionPDO();
             $req = $conn->prepare("SELECT * FROM utilisateur WHERE mail=:mail AND password=:password");
             $req->bindParam(':mail', $mail);
             $req->bindParam(':password', $password);
             $req->execute();
-            $user = $req->fetchAll()[0];
-            return $user;
-            
+            $user = $req->fetchAll();
+            if (count($user) !== 0) {
+                $result = $user[0];
+            }
+            return $result;
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage();
             die();

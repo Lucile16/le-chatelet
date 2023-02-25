@@ -1,13 +1,12 @@
 <?php
-    session_start();
     if (isset($_POST['mail']) && isset($_POST['actualpassword'])) {
         $mail = $_POST['mail'];
         $actualpassword = $_POST['actualpassword'];
+        $user = getOneUser($mail, $actualpassword);
+        $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
 
-        if (isset($user['password']) && $user['password'] === $actualpassword && isset($user['mail']) && $user['mail'] === $mail) {
-            $user = getOneUser($mail, $actualpassword);
-            // A HASHER : $hash = $user['password'];
-
+        if (isset($user['password']) && password_verify($actualpassword, $user['password']) && 
+            isset($user['mail']) && $user['mail'] === $mail) {
             // Stockage des informations de l'utilisateur dans la variable session
             $_SESSION['username'] = $user['username'];
             $_SESSION['mail'] = $mail;

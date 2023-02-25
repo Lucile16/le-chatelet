@@ -11,6 +11,7 @@
       <title>Clinique LE CHATELET</title>
   </head>
 
+  <?php session_start(); ?>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -23,8 +24,11 @@
               <a class="nav-link <?php if(basename($_SERVER['PHP_SELF'])  =='recommandations.php'){ ?>active<?php } ?>" href="index.php?page=1">Recommandations de la CNIL</a>
           </div>
         </div>
+        <?php if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) { ?>
         <a class="d-flex btn btn-success" href="index.php?page=2">Se connecter</a>
+        <?php }  else { ?>
         <a class="d-flex btn btn-danger" href="index.php?page=3">Se déconnecter</a>
+        <?php } ?>
       </div>
     </nav>
   </header>
