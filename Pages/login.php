@@ -13,8 +13,8 @@
             $_SESSION['actualpassword'] = $actualpassword;
             $_SESSION['is_logged_in'] = true;
 
-            // Connecté, redirection vers la page d'accueil
-            header('Location: http://localhost/le-chatelet/index.php?page=0');
+            // Connecté, redirection vers la page d'envoi de mail
+            header('Location: http://localhost/le-chatelet/index.php?page=4');
             exit();
         } else {
             // Affichage du message d'erreur

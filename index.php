@@ -23,6 +23,12 @@
 
             case 3 : include 'Pages/logout.php';
                 break;
+
+            case 4 : include 'Pages/mailer.php';
+                break;
+            
+            case 5 : include 'Pages/second_authentication.php';
+                break;
         }
 
         include 'Pages/footer.php';
