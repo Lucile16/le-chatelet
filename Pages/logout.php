@@ -1,8 +1,11 @@
 <?php
     session_start();
+	unset($_SESSION['username']);
 	unset($_SESSION['mail']);
 	unset($_SESSION['actualpassword']);
 	unset($_SESSION['is_logged_in']);
+	unset($_SESSION['code']);
+	unset($_SESSION['login_attempts']);
 
 	// Détruit la session
 	if(session_destroy())

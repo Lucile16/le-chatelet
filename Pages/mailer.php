@@ -22,12 +22,6 @@ try {
     $mail->addAddress('lulubeucher@orange.fr', 'Moi');
     $mail->Subject = 'Votre code de validation';
     $mail->Body = 'Votre code de validation est : ' . $code;
-
-    // if ($mail->send()) {
-    //     echo '<div class="container"><div class="alert alert-success d-flex align-items-center" role="alert">
-    //     Un e-mail vient de vous être envoyé !
-    //     </div></div>';
-    // }
 } catch (Exception $e) {
     echo '<div class="container"><div class="alert alert-danger d-flex align-items-center" role="alert">
     Une erreur est survenue lors de l\'envoi du mail !

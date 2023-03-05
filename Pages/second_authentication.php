@@ -57,5 +57,5 @@ var div = document.getElementById("envoi_mail");
 // Supprimer la div de l'élément parent après 10 secondes
 setTimeout(function() {
     parent.removeChild(div);
-}, 5000);
+}, 3000);
 </script>
