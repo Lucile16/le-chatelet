@@ -1,9 +1,17 @@
 <?php
+    // Vérifier si le nombre de tentatives est défini dans la session
+    if (!isset($_SESSION['login_attempts'])) {
+        // Si non, initialiser à 0
+        $_SESSION['login_attempts'] = 0;
+    }
+
     if (isset($_POST['mail']) && isset($_POST['actualpassword'])) {
         $mail = $_POST['mail'];
         $actualpassword = $_POST['actualpassword'];
         $user = getOneUser($mail, $actualpassword);
-        $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
+        if(isset($user['password'])) {
+            $user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);
+        }
 
         if (isset($user['password']) && password_verify($actualpassword, $user['password']) && 
             isset($user['mail']) && $user['mail'] === $mail) {
@@ -17,8 +25,25 @@
             header('Location: http://localhost/le-chatelet/index.php?page=4');
             exit();
         } else {
-            // Affichage du message d'erreur
-            echo("<script>alert('Identifiant ou mot de passe incorrect')</script>");
+            $_SESSION['login_attempts']++;
+            // Vérifier si le nombre de tentatives a dépassé la limite
+            if ($_SESSION['login_attempts'] >= 3) {
+                echo('<div class="container"><div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Vous avez dépassé la limite de tentatives de connexion ! Vous devez patienter avant de réessayer...
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div></div>');
+                // Afficher le message d'erreur avant la pause
+                ob_flush();
+                flush();
+                // Bloquer pendant 10 secondes
+                sleep(20);
+                $_SESSION['login_attempts'] = 0;
+            } else {
+                echo('<div class="container"><div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Identifiant ou mot de passe incorrect !
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div></div>');
+            }
         }
     }
 ?>

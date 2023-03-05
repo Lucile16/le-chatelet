@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 require 'vendor/autoload.php';
 
 $code = rand(100000, 999999);
+$_SESSION['code'] = $code;
 
 try {
     $mail = new PHPMailer(true);
