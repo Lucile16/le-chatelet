@@ -33,14 +33,14 @@
         }
     }
 ?>
-<div class="container">
+<div class="container" id="container">
     <div class="alert alert-success alert-dismissible fade show" id="envoi_mail" role="alert">
         Un e-mail vient de vous être envoyé !
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <form method="POST">
         <div class="form-floating">
-            <input type="text" class="form-control w-25" name="code" placeholder="code" pattern="\d{6}" title="Entrez un code à 6 chiffres" required>
+            <input type="text" class="form-control w-25 mt-3" name="code" placeholder="code" pattern="\d{6}" title="Entrez un code à 6 chiffres" required>
             <label for="floatingPassword">Code*</label>
             <span class="validity"></span>
         </div>
@@ -48,11 +48,14 @@
     </form>
 </div>
 <script>
-  // Récupérez l'élément d'alerte
-  var alert = document.getElementById("envoi_mail");
+// Récupérer l'élément parent de la div
+var parent = document.getElementById("container");
 
-  // Supprimer la classe "show" après 10 secondes
-  setTimeout(function() {
-    alert.classList.remove("show");
-  }, 10000);
+// Récupérer la div que vous souhaitez supprimer
+var div = document.getElementById("envoi_mail");
+
+// Supprimer la div de l'élément parent après 10 secondes
+setTimeout(function() {
+    parent.removeChild(div);
+}, 5000);
 </script>
