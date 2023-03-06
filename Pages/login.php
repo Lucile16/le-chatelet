@@ -89,8 +89,8 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show" id="advice-tab-pane" role="tabpanel" aria-labelledby="advice-tab" tabindex="0">
             <div class="card-body">
-                <p>La CNIL (Commission Nationale Informatique et Libertés) conseille de choisir un mot de passe de 12 caractères contenant au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.
-                Ce mot de passe ne doit pas contenir de données personnelles (ex : votre prénom) ni de lien psycho-affectif (ex : nom de votre chien).</p>
+                <p>La <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) conseille de choisir un mot de passe de <strong>12 caractères</strong> contenant au moins <strong>1 majuscule</strong>, <strong>1 minuscule</strong>, <strong>1 chiffre</strong> et <strong>1 caractère spécial</strong>.</p>
+                <p>Ce mot de passe ne doit pas contenir de <strong>données personnelles</strong> (ex : votre prénom) ni de <strong>lien psycho-affectif</strong> (ex : le nom de votre chien).</p>
             </div>
         </div>
     </div>
