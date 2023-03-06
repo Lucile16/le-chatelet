@@ -1,72 +1,65 @@
 <?php
-
-//On récupère toute la liste des recettes
-function getRecipes() : array {
-    $recipes = array();
-    try { 
-        $conn = connexionPDO();
-        $req = $conn->prepare("SELECT * FROM recipe");
-        $req->execute();
-        $recipes = $req->fetchAll();
-        return $recipes;
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
-    }
-}
-
-//On récupère une recette dans la liste des recettes
-function getOneRecipe() {
-    try {
-        if (isset($_GET['recipe'])){
-            $id = $_GET['recipe'];
+    //On récupère toute la liste des utilisateurs
+    function getUsers() : array {
+        $users = array();
+        try { 
             $conn = connexionPDO();
-            $req = $conn->prepare("SELECT * FROM recipe Where id=$id");
+            $req = $conn->prepare("SELECT * FROM user");
             $req->execute();
-            $recipe = $req->fetchAll()[0]; //Mettre un fetch assoc
-            return $recipe;
+            $users = $req->fetchAll();
+            //var_dump($users);
+            return $users;
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
         }
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
     }
-}
 
-//On ajoute une nouvelle recette
-function insertRecipe(string $nom, int $temps_preparation, int $temps_cuisson, int $niveau, string $categorie, string $preparation) {
-    try { 
-        $conn = connexionPDO();
-        $req = $conn->prepare("INSERT INTO recipe(nom, temps_preparation, temps_cuisson, niveau, categorie, preparation) values (:nom, :temps_preparation, :temps_cuisson, :niveau, :categorie, :preparation)");
-        $req->bindParam(':nom',$nom);
-        $req->bindParam(':temps_preparation',$temps_preparation);
-        $req->bindParam(':temps_cuisson',$temps_cuisson);
-        $req->bindParam(':niveau',$niveau);
-        $req->bindParam(':categorie',$categorie);
-        $req->bindParam(':preparation',$preparation);
-        $req->execute();
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
+    //On récupère un utilisateur
+    function getOneUser($mail, $password) {
+        try {
+            $result = null;
+            $conn = connexionPDO();
+            $req = $conn->prepare("SELECT * FROM user WHERE mail=:mail AND password=:password");
+            $req->bindParam(':mail', $mail);
+            $req->bindParam(':password', $password);
+            $req->execute();
+            $user = $req->fetchAll();
+            if (count($user) !== 0) {
+                $result = $user[0];
+            }
+            return $result;
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
     }
-}
 
-//On modifie une recette
-function updateRecipe(int $id, string $nom, int $temps_preparation, int $temps_cuisson, int $niveau, string $categorie, string $preparation) {
-    try { 
-        $conn = connexionPDO();
-        $req = $conn->prepare("UPDATE recipe SET nom = :nom, temps_preparation = :temps_preparation, temps_cuisson = :temps_cuisson, niveau = :niveau, categorie = :categorie, preparation = :preparation where id = :id");
-        $req->bindParam(':id',$id);
-        $req->bindParam(':nom',$nom);
-        $req->bindParam(':temps_preparation',$temps_preparation);
-        $req->bindParam(':temps_cuisson',$temps_cuisson);
-        $req->bindParam(':niveau',$niveau);
-        $req->bindParam(':categorie',$categorie);
-        $req->bindParam(':preparation',$preparation);
-        $req->execute();
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
+    //On modifie un utilisateur pour ajouter sa localisation
+    function updateUserLocation(int $id, string $location) {
+        try { 
+            $conn = connexionPDO();
+            $req = $conn->prepare("UPDATE user SET location = :location WHERE id = :id");
+            $req->bindParam(':id',$id);
+            $req->bindParam(':location',$location);
+            $req->execute();
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
     }
-}
 
+    //On modifie un utilisateur pour ajouter sa localisation
+    function updateUserBrowser(int $id, string $browser) {
+        try { 
+            $conn = connexionPDO();
+            $req = $conn->prepare("UPDATE user SET browser = :browser WHERE id = :id");
+            $req->bindParam(':id',$id);
+            $req->bindParam(':browser',$browser);
+            $req->execute();
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
 ?>
