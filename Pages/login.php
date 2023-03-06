@@ -48,11 +48,14 @@
         }
     }
 ?>
-<div class="card d-flex mx-auto text-center w-25 h-25 mt-5">
+<div class="card d-flex mx-auto text-center w-50 h-25 mt-5">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Connexion</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="advice-tab" data-bs-toggle="tab" data-bs-target="#advice-tab-pane" type="button" role="tab" aria-controls="advice-tab-pane" aria-selected="true">Conseils pour votre mot de passe</button>
             </li>
         </ul>
     </div>
@@ -79,6 +82,15 @@
                     </div> -->
                     <button type="submit" class="btn btn-primary btn-block mt-3">Se connecter</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show" id="advice-tab-pane" role="tabpanel" aria-labelledby="advice-tab" tabindex="0">
+            <div class="card-body">
+                <p>La CNIL (Commission Nationale Informatique et Libertés) conseille de choisir un mot de passe de 12 caractères contenant au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.
+                Ce mot de passe ne doit pas contenir de données personnelles (ex : votre prénom) ni de lien psycho-affectif (ex : nom de votre chien).</p>
             </div>
         </div>
     </div>
