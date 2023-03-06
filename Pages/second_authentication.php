@@ -2,8 +2,28 @@
     $ip = $_SERVER['REMOTE_ADDR'];
     $location = json_decode(file_get_contents('http://ip-api.com/json/94.228.189.238'));//.$ip
     if($location && $location->status == 'success') {
-        updateUser($_SESSION['id'], $location->country);
+        updateUserLocation($_SESSION['id'], $location->country);
     }
+    
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    if (strpos($user_agent, 'Chrome') !== false) {
+        $browser = 'Google Chrome';
+    } elseif (strpos($user_agent, 'Firefox') !== false) {
+        $browser = 'Mozilla Firefox';
+    } elseif (strpos($user_agent, 'Safari') !== false) {
+        $browser = 'Apple Safari';
+    } elseif (strpos($user_agent, 'Opera') !== false) {
+        $browser = 'Opera';
+    } elseif (strpos($user_agent, 'Edge') !== false) {
+        $browser = 'Microsoft Edge';
+    } elseif (strpos($user_agent, 'MSIE') !== false || strpos($user_agent, 'Trident/') !== false) {
+        $browser = 'Microsoft Internet Explorer';
+    } else {
+        $browser = 'inconnu';
+    }
+
+    updateUserBrowser($_SESSION['id'], $browser);
 
     // Vérifier si le nombre de tentatives est défini dans la session
     if (!isset($_SESSION['login_attempts'])) {

@@ -36,12 +36,26 @@
     }
 
     //On modifie un utilisateur pour ajouter sa localisation
-    function updateUser(int $id, string $location) {
+    function updateUserLocation(int $id, string $location) {
         try { 
             $conn = connexionPDO();
             $req = $conn->prepare("UPDATE user SET location = :location WHERE id = :id");
             $req->bindParam(':id',$id);
             $req->bindParam(':location',$location);
+            $req->execute();
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
+
+    //On modifie un utilisateur pour ajouter sa localisation
+    function updateUserBrowser(int $id, string $browser) {
+        try { 
+            $conn = connexionPDO();
+            $req = $conn->prepare("UPDATE user SET browser = :browser WHERE id = :id");
+            $req->bindParam(':id',$id);
+            $req->bindParam(':browser',$browser);
             $req->execute();
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage();
