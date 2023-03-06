@@ -4,7 +4,7 @@
         $users = array();
         try { 
             $conn = connexionPDO();
-            $req = $conn->prepare("SELECT * FROM utilisateur");
+            $req = $conn->prepare("SELECT * FROM user");
             $req->execute();
             $users = $req->fetchAll();
             //var_dump($users);
@@ -20,7 +20,7 @@
         try {
             $result = null;
             $conn = connexionPDO();
-            $req = $conn->prepare("SELECT * FROM utilisateur WHERE mail=:mail AND password=:password");
+            $req = $conn->prepare("SELECT * FROM user WHERE mail=:mail AND password=:password");
             $req->bindParam(':mail', $mail);
             $req->bindParam(':password', $password);
             $req->execute();
@@ -29,6 +29,20 @@
                 $result = $user[0];
             }
             return $result;
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
+
+    //On modifie un utilisateur pour ajouter sa localisation
+    function updateUser(int $id, string $location) {
+        try { 
+            $conn = connexionPDO();
+            $req = $conn->prepare("UPDATE user SET location = :location WHERE id = :id");
+            $req->bindParam(':id',$id);
+            $req->bindParam(':location',$location);
+            $req->execute();
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage();
             die();

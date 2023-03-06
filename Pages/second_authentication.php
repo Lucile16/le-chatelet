@@ -1,4 +1,10 @@
 <?php
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $location = json_decode(file_get_contents('http://ip-api.com/json/94.228.189.238'));//.$ip
+    if($location && $location->status == 'success') {
+        updateUser($_SESSION['id'], $location->country);
+    }
+
     // Vérifier si le nombre de tentatives est défini dans la session
     if (!isset($_SESSION['login_attempts'])) {
         // Si non, initialiser à 0

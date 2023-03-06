@@ -2,7 +2,7 @@
     function connexionPDO() : PDO {
         try {
             $conn = new PDO(
-                "mysql:host=localhost;dbname=chatelet;charset=utf8","root","",
+                "mysql:host=localhost;dbname=chatelet;charset=utf8","root","Lbbq**0516",
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],
             );
             return $conn;

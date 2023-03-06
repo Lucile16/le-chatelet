@@ -16,6 +16,7 @@
         if (isset($user['password']) && password_verify($actualpassword, $user['password']) && 
             isset($user['mail']) && $user['mail'] === $mail) {
             // Stockage des informations de l'utilisateur dans la variable session
+            $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['mail'] = $mail;
             $_SESSION['actualpassword'] = $actualpassword;
