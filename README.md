@@ -10,3 +10,5 @@ Ensuite, vous pouvez le renseigner directement et le confirmer :
 1. Si vous rentré un mauvais code, vous serez averti que le code est incorrect et vous avez 3 tentatives.<br>
    Si vous dépassez ces 3 tentatives, vous devrez attendre 20 secondes.
 2. Enfin, si vous avez rentré le bon code, vous serez connecté.
+
+Vous pouvez également vous déconnecter en cliquant sur le bouton en haut à droite.
