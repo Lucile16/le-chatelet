@@ -1,6 +1,6 @@
 <?php
     $ip = $_SERVER['REMOTE_ADDR'];
-    $location = json_decode(file_get_contents('http://ip-api.com/json/94.228.189.238'));//.$ip
+    $location = json_decode(file_get_contents('http://ip-api.com/json/'.$ip));
     if($location && $location->status == 'success') {
         updateUserLocation($_SESSION['id'], $location->country);
     }
