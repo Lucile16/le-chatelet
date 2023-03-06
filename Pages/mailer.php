@@ -19,7 +19,7 @@ try {
     $mail->smtp_tls_security_level = 'tls';
 
     $mail->setFrom('lulubeucher@gmail.com', 'Lucile BEUCHER');
-    $mail->addAddress('lulubeucher@orange.fr', 'Moi');
+    $mail->addAddress($_SESSION['mail'], $_SESSION['username']);
     $mail->Subject = 'Votre code de validation';
     $mail->Body = 'Votre code de validation est : ' . $code;
 } catch (Exception $e) {
